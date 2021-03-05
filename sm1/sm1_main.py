@@ -1,8 +1,8 @@
-from sm1 import SelfishMiningOne
+import sm1
 
 iteration_number = 20000
 
-selfish_mining_one = SelfishMiningOne(False)
+selfish_mining_one = sm1.SelfishMiningOne(False)
 selfish_mining_one.alpha = 0.35
 selfish_mining_one.gamma = 0.5
 selfish_mining_one.print_input_statistic()
