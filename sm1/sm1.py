@@ -1,9 +1,26 @@
 # first strategy by using Sirer Aritcla published in 2014
 import random
 from matplotlib import pyplot as plt
+import xlrd
+import xlwt
+from xlwt import *
 
 
 class SelfishMiningOne:
+    alpha_gamma0 = []
+    alpha_gamma05 = []
+    alpha_gamma1 = []
+
+    def data_write(self, datas, i):  # datas是列表
+        # print(datas)
+        f = xlwt.Workbook()
+        sheet1 = f.add_sheet('sheet'+str(i), cell_overwrite_ok=True)  # 创建sheet
+        # 将数据写入第 i 行，第 j 列
+        for j in range(len(datas)):
+            sheet1.write(j, i, datas[j])
+    
+        f.save('test' + str(i) + '.xls')  # 保存文件
+    
     def __init__(self, show_log=False):
         self._alpha = 0
         self._gamma = 0
@@ -210,7 +227,7 @@ class SelfishMiningOne:
         return
 
     def visualize_data(self, iteration_number):
-        alpha_values = [x / 100 for x in range(51) if x % 5 == 0]
+        alpha_values = [x / 100 for x in range(51) if x % 2 == 0]
         selfish_revenue_value_0 = []
         selfish_revenue_value_0_5 = []
         selfish_revenue_value_1 = []
@@ -263,3 +280,7 @@ class SelfishMiningOne:
         plt.legend(loc="upper left")
 
         plt.show()
+        self.data_write(selfish_revenue_value_0, 0)
+        self.data_write(selfish_revenue_value_0_5, 1)
+        self.data_write(selfish_revenue_value_1, 2)
+        self.data_write(honest_revenue_value, 3)
